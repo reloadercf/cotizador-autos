@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 const autos = [
   {
     marca: 'BMW',
@@ -173,3 +172,5 @@ const autos = [
     transmision: 'automatico',
   },
 ];
+
+export default autos;

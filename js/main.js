@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-use-before-define */
+import autos from './db.js';
+
 const brand = document.querySelector('#marca');
 const yearDom = document.querySelector('#year');
 const minDom = document.querySelector('#minimo');
@@ -27,7 +29,7 @@ const dataSearch = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  getCar();
+  setCar(autos);
   pushSelect();
 });
 
@@ -62,8 +64,9 @@ colorDom.addEventListener('change', (e) => {
   dataSearch.color = e.target.value;
 });
 
-function getCar() {
-  autos.forEach((element) => {
+function setCar(cars) {
+  cleanCar();
+  cars.forEach((element) => {
     const {
       marca, modelo, year, puertas, transmision, precio, color,
     } = element;
@@ -73,6 +76,12 @@ function getCar() {
     `;
     resul.appendChild(autoHMTL);
   });
+}
+
+function cleanCar() {
+  while (resul.firstChild) {
+    resul.removeChild(resul.firstChild);
+  }
 }
 
 function pushSelect() {
@@ -87,7 +96,7 @@ function pushSelect() {
 
 function filterAuto() {
   const result = autos.filter(filterBrand).filter(filterYear);
-  console.log(result);
+  setCar(result);
 }
 
 function filterBrand(auto) {
